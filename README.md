@@ -9,3 +9,4 @@
 * Gitlab CI and Serverless is used to deploy to Lambda 
 * Assumes an internal role system
 * If you want help getting this working, send me an email (eric@softcorp.ca)
+* The system is meant to deploy the 'development' branch to your development aws/environment and the 'production' branch to your production environment
