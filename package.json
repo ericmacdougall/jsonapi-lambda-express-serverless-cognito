@@ -1,0 +1,41 @@
+{
+  "name": "lambdaexpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "sls offline --useSeparateProcesses"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amazon-cognito-identity-js": "^3.2.0",
+    "aws-sdk": "^2.585.0",
+    "bluebird": "^3.7.1",
+    "body-parser": "^1.19.0",
+    "cognito-express": "^2.0.16",
+    "express": "^4.17.1",
+    "express-session": "^1.15.6",
+    "express-simple-firewall": "1.0.x",
+    "express-simple-router": "0.0.x",
+    "json-api": "git+https://{user}:{token}@gitlab.com/{project}/json-api.git",
+    "mongoose": "5.7.12",
+    "node-fetch": "^2.6.0",
+    "path-to-regexp": "0.1.2",
+    "pg": "^7.12.1",
+    "pluralize": "0.0.10",
+    "request": "^2.88.0",
+    "require-dir": "^1.2.0",
+    "safe-eval": "^0.4.1",
+    "serverless": "^1.56.1",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-http": "^2.3.0",
+    "serverless-models": "git+https://{user}:{token}@gitlab.com/{project}/serverlessmodelslib.git",
+    "twilio-alerts": "git+https://{user}:{token}@gitlab.com/{project}/twilio-alerts.git"
+  },
+  "devDependencies": {
+    "serverless-domain-manager": "^3.3.0",
+    "serverless-offline": "^5.12.0"
+  }
+}

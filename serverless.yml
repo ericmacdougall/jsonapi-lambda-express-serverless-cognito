@@ -1,0 +1,49 @@
+service: ${env:APP_NAME}
+provider:
+  name: aws
+  runtime: nodejs10.x
+  versionFunctions: false
+  stage: ${env:STAGE}
+  region: ${env:AWS_DEFAULT_REGION}
+  aws_access_key_id: ${env:AWS_ACCESS_KEY_ID}
+  aws_secret_access_key: ${env:AWS_SECRET_ACCESS_KEY}
+  timeout: 10
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: ${env:DOMAIN_NAME}
+    basePath: ${env:route}
+    stage: ${env:STAGE}
+    createRoute53Record: true
+    certificateName: ${env:SSL_CERT_NAME}
+    endpointType: 'edge'
+  serverless-offline:
+    port: ${env:PORT}
+  dotenv:
+    include:
+      - MONGO_URL
+      - MONGO_URL_FOR_LOGS
+      - COGNITO_POOL_ID
+      - COGNITO_CLIENT_ID
+      - COGNITO_EXPIRATION
+      - STAGE
+      - route
+      - MODEL
+      - DEBUG
+      - SnsAccessKeyId
+      - SnsSecretAccessKey
+      - SnsRegion
+      - SnsARN
+
+functions:
+  app:
+    handler: index.server
+    timeout: ${env:LAMBDA_TIMEOUT}
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

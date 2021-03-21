@@ -1,0 +1,31 @@
+image: node:latest
+
+stages:
+  - deploy
+
+deployment:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == "development"
+    - if: $CI_COMMIT_BRANCH == "staging"
+    - if: $CI_COMMIT_BRANCH == "production"
+    - changes:      
+      - /*.js
+      - /*.yml
+      - /package*.json
+      - /util/*.js
+      - /util/*/*.js
+  before_script:
+    - key=AWS_ACCESS_KEY_ID_${CI_COMMIT_REF_NAME}
+    - sec=AWS_SECRET_ACCESS_KEY_${CI_COMMIT_REF_NAME}
+    - export AWS_ACCESS_KEY_ID=${!key}
+    - export AWS_SECRET_ACCESS_KEY=${!sec}
+    - export env_file=${CI_COMMIT_REF_NAME}_env
+    - cp ${!env_file} ./.env
+    - npm config set prefix /usr/local
+    - git clone https://user:password@gitlab.com/{your-namespace}/serverlessmodelslib.git
+    - npm install -force
+  script:
+    - serverless create_domain
+    - serverless deploy
+    
